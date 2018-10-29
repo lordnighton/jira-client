@@ -20,7 +20,8 @@ public class ClientApplication implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
         LOG.info("EXECUTING : command line runner");
 
-        jiraService.createSession();
+        String sessionID = jiraService.createSession();
+        jiraService.createJiraIssue(sessionID);
 	}
 
     public static void main(String[] args) {

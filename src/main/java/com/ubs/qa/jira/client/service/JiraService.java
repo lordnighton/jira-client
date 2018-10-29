@@ -46,6 +46,24 @@ public class JiraService {
         return response.body().toString();
     }
 
+    public String createJiraIssue(String sessionID) throws IOException {
+        RequestBody body = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                new Credentials(userName, userPassword).toJson());
+
+        Request request = new Request.Builder()
+                .url(jiraSessionAPI)
+                .post(body)
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+
+        LOG.info("Request = " + request.body().toString());
+        LOG.info("Response = " + response.body().string());
+
+        return response.body().toString();
+    }
+
     private class Credentials {
         private String userName;
         private String userPassword;
